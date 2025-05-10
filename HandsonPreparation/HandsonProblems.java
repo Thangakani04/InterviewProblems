@@ -1,0 +1,75 @@
+package InterviewProblems;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+class Employee {
+	String name;
+	long id;
+	String dept;
+	Employee(String name, long id, String dept){
+		this.name = name;
+		this.id = id;
+		this.dept = dept;
+	}
+	
+}
+
+public class HandsonProblems {
+	
+	
+	
+	//Find the second highest number in a list of integers.
+	public static void main(String[] args) {
+		
+		secongHighestNumber();
+		ReturnStringwithAandLength();
+		groupEmployeesByDepartment();
+		
+		
+	}
+
+	private static void groupEmployeesByDepartment() {
+		//Given a list of employees, group them by department and count how many employees are in each department.
+		List<Employee> empObj = Arrays.asList(new Employee("Kani", 1, "Development"),
+				new Employee("Nivi", 2, "Cloud"),
+				new Employee("Moni", 3, "Testing"),
+				new Employee("Alex", 5, "Cloud"),
+				new Employee("Swetha", 6, "Development")
+				);
+		Map<String, Long> hs = empObj.stream().map(emp -> emp.dept).collect(Collectors.groupingBy(Function.identity() , Collectors.counting()));
+		System.out.println("List of employees, group them by department and count : " + hs);
+		
+		Map<String, Long> hs1 = empObj.stream().collect(Collectors.groupingBy(emp -> emp.dept , Collectors.counting()));
+		System.out.println("List of employees, group them by department and count hs1 : " + hs1);
+			
+		
+		
+	}
+
+	public static void ReturnStringwithAandLength() {
+		//Given a list of strings, return a list of strings that start with "A" and are of length 3.
+		List<String> words = Arrays.asList("Anu", "Anju" ,"Ani" ,"Kani" ,"Ammu");
+		List<String> output = words.stream().filter(str -> str.startsWith("A") && str.length() == 3).collect(Collectors.toList());
+		System.out.println("List of strings that start with A and are of length 3 : " + output);
+		
+		//If case sensitive
+		List<String> output1 = words.stream().filter(str -> str.toUpperCase().startsWith("A") && str.length() == 3).collect(Collectors.toList());
+		System.out.println("List of strings that start with A and are of length 3 with case sensitive : " + output1);
+		
+	}
+
+	public static void secongHighestNumber() {
+		List<Integer> numbers = Arrays.asList(2,4,6,1,7,8,8);
+		Optional<Integer> secondMax = numbers.stream().distinct().sorted(Comparator.reverseOrder()).skip(1).findFirst();
+		System.out.println("The second highest number :" + secondMax.get());
+		
+	}
+
+}
