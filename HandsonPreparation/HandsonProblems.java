@@ -38,6 +38,7 @@ public class HandsonProblems {
 	}
 
 	public static void duplicateNumbers() {
+		//Find the duplicate elements in a list of integers.
 		List<Integer> numbers = Arrays.asList(1,2,4,4,5,2,7,8,9,5);
 		Set<Integer> duplicateNumbers = numbers.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
 				.entrySet().stream().filter(e -> e.getValue() > 1)
