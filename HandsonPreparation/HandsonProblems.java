@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,17 @@ public class HandsonProblems {
 		secongHighestNumber();
 		ReturnStringwithAandLength();
 		groupEmployeesByDepartment();
+		duplicateNumbers();
 		
+		
+	}
+
+	public static void duplicateNumbers() {
+		List<Integer> numbers = Arrays.asList(1,2,4,4,5,2,7,8,9,5);
+		Set<Integer> duplicateNumbers = numbers.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+				.entrySet().stream().filter(e -> e.getValue() > 1)
+				.map(Map.Entry::getKey).collect(Collectors.toSet());
+		System.out.println("Duplicates numbers are :" + duplicateNumbers);
 		
 	}
 
