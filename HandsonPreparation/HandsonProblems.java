@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 class Employee {
 	String name;
@@ -23,9 +24,6 @@ class Employee {
 }
 
 public class HandsonProblems {
-	
-	
-	
 	//Find the second highest number in a list of integers.
 	public static void main(String[] args) {
 		
@@ -37,6 +35,32 @@ public class HandsonProblems {
 		groupwordsByFrequency();		//6
 		sortListofStrings();			//7
 		sortListofStrLenAlphebetical();	//8
+		StringsPalindromeinList();		//9
+		palindromeString();				//10
+		
+		
+	}
+
+	public static void palindromeString() {
+		String word = "kani";
+		int len = word.length();
+		boolean flag = IntStream.range(0, len/2).allMatch(i-> word.charAt(i) == word.charAt(len-i-1));
+		if(flag == true) {
+			System.out.println("Its palindrome ");
+		}
+		else {
+			System.out.println("Its not palindrome ");
+		}
+			
+	}
+
+
+	public static void StringsPalindromeinList() {
+		// Check if all strings in a list are palindromes.
+		List<String> list = Arrays.asList("madam" ,"kani" ,"malayalam","nivi");
+		List<String> palindromes = list.stream().filter(word -> word.equals(new StringBuilder(word).reverse().toString()))
+				.collect(Collectors.toList());
+		System.out.println("Palindrome strings are : " +palindromes);
 		
 		
 	}
@@ -94,6 +118,12 @@ public class HandsonProblems {
 				.stream()
 				.filter(e -> e.getValue() > 1)
 				.map(Map.Entry::getKey).collect(Collectors.toSet());
+		
+		Set<Integer> duplicateNumbers1 = numbers.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+				.entrySet()
+				.stream()
+				.filter(entry -> entry.getValue() > 1)
+				.map(entry -> entry.getKey()).collect(Collectors.toSet());
 		System.out.println("Duplicates numbers are :" + duplicateNumbers);
 		
 	}
