@@ -47,7 +47,7 @@ public class StreamSortingFiltering {
 				.limit(3)
 				.toList();
 		
-		System.out.println(output);
+		System.out.println("Output " + output);
 				
 	}
 
