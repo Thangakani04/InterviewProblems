@@ -18,10 +18,14 @@ class EmpClass1 {
             this.name = name;
             this.age = age;
             this.salary = salary;
-        }
-
+        }    
     
-        public int getId() { return id; }
+        @Override
+		public String toString() {
+			return "EmpClass1 [id=" + id + ", name=" + name + ", age=" + age + ", salary=" + salary + "]";
+		}
+
+		public int getId() { return id; }
         public String getName() { return name; }
         public int getAge() { return age; }
         public double getSalary() { return salary; }
@@ -48,6 +52,19 @@ public class StreamSortingFiltering {
 				.toList();
 		
 		System.out.println("Output " + output);
+		
+		
+		// If e1.getAge() > e2.getAge() → return 1
+
+		// If e1.getAge() < e2.getAge() → return -1
+
+		// If equal → return 0
+		
+		List<EmpClass1> output1 = employees.stream()
+				.sorted((e1,e2) -> e1.getAge() > e2.getAge() ? 1 : e1.getAge() < e2.getAge() ? -1 : 0)
+				.collect(Collectors.toList());
+		
+		System.out.println("Output1 " + output1);
 				
 	}
 
