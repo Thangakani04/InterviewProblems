@@ -2,6 +2,7 @@ package InterviewProblems;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,6 +15,22 @@ public class StreamsJult23 {
 		
 		mostrepeatedElementsinArray();
 		duplicateElementsinListwithCount();
+		firstRepeatedCharinString();
+	}
+
+	private static void firstRepeatedCharinString() {
+		String str = "Thhangakani";
+		Optional<Character> ch = str.chars()
+				.mapToObj(c -> (char)c)
+				.collect(Collectors.groupingBy(Function.identity(),() -> new LinkedHashMap<>(),Collectors.counting()))
+				.entrySet()
+				.stream()
+				.filter(ent -> ent.getValue()>1)
+				.map(ent -> ent.getKey())
+				.findAny();
+		
+		System.out.println(ch.get());
+		
 	}
 
 	private static void duplicateElementsinListwithCount() {
