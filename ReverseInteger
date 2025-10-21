@@ -1,0 +1,31 @@
+package Leetcodeproblems;
+
+public class ReverseInteger {
+	
+	public static void main(String[] args) {
+		int x =1534236469;
+		int output = (int) reverse(x);
+	System.out.println("Answer is " + output);	
+	}
+
+	 static long reverse(int x) {
+		 
+		 if (x == 0) {
+			 return 0;
+		 }
+		 
+		 boolean isNegative = x < 0;
+		//String str ="";
+		x = Math.abs(x);
+		long reversed = 0;
+		 while(x>0) {
+			 int digit = x % 10;
+	            reversed = reversed * 10 + digit;
+	            x /= 10;
+		 }
+		
+		//int outstr = Integer.valueOf(str);
+		return isNegative ? -reversed : reversed;
+	}
+
+}
